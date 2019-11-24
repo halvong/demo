@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Demo Page</title>
+    </head>
+    <body>
+        <h1>that page works</h1>
+         <ul>
+            Hi
+            {% for rec in dates %}
+                <li><a href="{{ rec.date|date:"c" }}">{{rec.date}}</a>, {{rec.revenue_sum}}, {{rec.clicks_sum}}</li>
+            {% endfor %}
+        </ul>
+
+    </body>
+</html>
