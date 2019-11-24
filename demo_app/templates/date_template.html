@@ -5,8 +5,9 @@
     <body>
         <h1>that page works</h1>
          <ul>
-            Hi
-
+             {% for rec in publishers %}
+                <li><a href="{{rec.publisher}}">{{rec.publisher}}</a>, {{rec.revenue_sum}}, {{rec.clicks_sum}}</li>
+            {% endfor %}
         </ul>
 
     </body>

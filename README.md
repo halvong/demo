@@ -13,10 +13,4 @@
 3. Source.objects.bulk_create([Source(name="yahoo"),Source(name="google")])
 4. Publisher.objects.bulk_create([Publisher(name="micha"),Publisher(name="mark"),Publisher(name="melanie"),Publisher(name="logan")])
 execfile('generate_data.py')
-5. from django.db.models import Sum
-RevenueRecord.objects.values('date').annotate(revenue=Sum('revenue'), clicks=Sum('clicks')).order_by('-date')
-
-
- {% for rec in publishers %}
-                <li><a href="">{{rec.publisher}}</a>, {{rec.revenue}}, {{rec.clicks}}</li>
-            {% endfor %}
+5. RevenueRecord.objects.values('date').annotate(revenue=Sum('revenue'), clicks=Sum('clicks')).order_by('-date')
