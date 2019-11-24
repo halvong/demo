@@ -1,12 +1,12 @@
 <html>
     <head>
-        <title>Date Page</title>
+        <title>Publisher</title>
     </head>
     <body>
-        <h1>that page works</h1>
+        <h1>{{ q_date }}</h1>
          <ul>
              {% for rec in publishers %}
-                <li><a href="{{rec.publisher}}">{{rec.publisher}}</a>, {{rec.revenue_sum}}, {{rec.clicks_sum}}</li>
+                <li><a href="{{ rec.date|date:"c" }}/{{rec.publisher.id}}">{{rec.publisher.name}}</a>, {{rec.revenue_sum}}, {{rec.clicks_sum}}</li>
             {% endfor %}
         </ul>
 

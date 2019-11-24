@@ -1,13 +1,13 @@
 <html>
     <head>
-        <title>Demo Page</title>
+        <title>Source</title>
     </head>
     <body>
-        <h1>that page works</h1>
+        <h1>{{ publisher.name|title }} - {{ q_date }}</h1>
          <ul>
             Hi
             {% for rec in publishers %}
-                <li><a href="">{{rec.publisher.name}}</a>, {{rec.revenue}}, {{rec.clicks}}</li>
+                <li>{{rec.source.name|title}}, {{rec.revenue_sum}}, {{rec.clicks_sum}}</li>
             {% endfor %}
         </ul>
 

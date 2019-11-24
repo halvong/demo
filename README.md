@@ -14,3 +14,5 @@
 4. Publisher.objects.bulk_create([Publisher(name="micha"),Publisher(name="mark"),Publisher(name="melanie"),Publisher(name="logan")])
 execfile('generate_data.py')
 5. RevenueRecord.objects.values('date').annotate(revenue=Sum('revenue'), clicks=Sum('clicks')).order_by('-date')
+   dates = RevenueRecord.objects.filter(date="2019-10-31").annotate(revenue_sum=Sum('revenue'), clicks_sum=Sum('clicks')).order_by('publisher')
+   publishers = RevenueRecord.objects.filter(date="2019-10-31",publisher=2).values('source').annotate(revenue_sum=Sum('revenue'), clicks_sum=Sum('clicks')).order_by('source')

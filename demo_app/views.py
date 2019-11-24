@@ -1,25 +1,28 @@
 from django.shortcuts import render
 from django.db.models import Sum
 from django.views import View
-from .models import RevenueRecord
+from .models import RevenueRecord, Publisher
 from django.shortcuts import render, get_object_or_404
+import datetime
 
 # Create your views here.
 
 class IndexView(View):
     def get(self, request):
         revenue = RevenueRecord.objects.values('date').annotate(revenue_sum=Sum('revenue'), clicks_sum=Sum('clicks')).order_by('-date')
-        #revenue = RevenueRecord.objects.annotate(revenue_sum=Sum('revenue'), clicks_sum=Sum('clicks')).order_by('-date')
         return render(request, 'index_template.html', {'dates': revenue})
 
 class DateView(View):
     def get(self, request, q_date):
-        print ("17date:",q_date)
-        dates = RevenueRecord.objects.filter(date=q_date).values('publisher').annotate(revenue_sum=Sum('revenue'), clicks_sum=Sum('clicks')).order_by('publisher')
-        return render(request, 'date_template.html', {'publishers': dates})
+        ddate = datetime.datetime.strptime(q_date,"%Y-%m-%d").strftime("%B %d, %Y")
+        records = RevenueRecord.objects.filter(date=q_date).annotate(revenue_sum=Sum('revenue'), clicks_sum=Sum('clicks')).order_by('publisher')
+        return render(request, 'date_template.html', {'publishers': records, 'q_date': ddate})
 
-#class PublisherView(View):
-#    def get(self, request):
-#record = get_object_or_404(RevenueRecord, date__year=year, date__month=month, date__day=day)
-#        queryset = RevenueRecord.objects.values('date').annotate(revenue=Sum('revenue'), clicks=Sum('clicks')).order_by('-date')
-#        return render(request, 'publisher_template.html', {'dates': queryset})
+class PublisherView(View):
+    def get(self, request, q_date, q_publisher):
+
+        publisher = get_object_or_404(Publisher, id=q_publisher)
+
+        ddate = datetime.datetime.strptime(q_date,"%Y-%m-%d").strftime("%B %d, %Y")
+        publishers = RevenueRecord.objects.filter(date=q_date,publisher=q_publisher).annotate(revenue_sum=Sum('revenue'), clicks_sum=Sum('clicks')).order_by('source')
+        return render(request, 'publisher_template.html', {'publishers': publishers, 'q_date': ddate, 'publisher': publisher})
