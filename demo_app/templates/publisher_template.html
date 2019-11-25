@@ -12,8 +12,8 @@
     <tbody>
         {% for rec in publishers %}
             <tr>
-                <th scope="row">{{ forloop.counter }}.&nbsp;&nbsp;</th>
-                <td>{{rec.source.name|title}}</td>
+                <th scope="row">{{ forloop.counter }}.</th>
+                <td>{{rec.source__name|title}}</td>
                 <td>{{ rec.revenue_sum|floatformat:2|intcomma }}</td>
                 <td>{{ rec.clicks_sum }}</td>
             </tr>

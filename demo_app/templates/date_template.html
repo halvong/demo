@@ -13,7 +13,7 @@
         {% for rec in publishers %}
             <tr>
                 <th scope="row">{{ forloop.counter }}.&nbsp;&nbsp;</th>
-                <td><a href="{{ rec.date|date:"c" }}/{{rec.publisher.id}}">{{rec.publisher.name|title}}</a></td>
+                <td><a href="{{ rec.date|date:"c" }}/{{rec.publisher.id}}">{{rec.publisher__name|title}}</a></td>
                 <td>{{ rec.revenue_sum|floatformat:2|intcomma }}</td>
                 <td>{{ rec.clicks_sum }}</td>
             </tr>
