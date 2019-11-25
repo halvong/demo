@@ -16,10 +16,13 @@ Nov. 24, 2019
 2. Source.objects.bulk_create([Source(name="yahoo"),Source(name="google")])
 3. Publisher.objects.bulk_create([Publisher(name="micha"),Publisher(name="mark"),Publisher(name="melanie"),Publisher(name="logan")])
 execfile('generate_data.py')
-. from demo_app.models import Publisher, Source, RevenueRecord
-   from django.db.models import Sum 
+from demo_app.models import Publisher, Source, RevenueRecord
+from django.db.models import Sum 
    
 #misc
 from demo_app.models import Publisher, Source, RevenueRecord
 RevenueRecord.objects.create(date=d, clicks=clicks, revenue=revenue, publisher_id=pub, source_id=source)
 path: cd /home/hal/softwares/pycharm/workspace/django/recruiting/demo
+docker exec -it 4c5125771c72 bash
+python manage.py ingest --file demo_data.csv
+
