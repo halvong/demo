@@ -1,15 +1,24 @@
-<html>
-    <head>
-        <title>Source</title>
-    </head>
-    <body>
-        <h1>{{ publisher.name|title }} - {{ q_date }}</h1>
-         <ul>
-            Hi
-            {% for rec in publishers %}
-                <li>{{rec.source.name|title}}, {{rec.revenue_sum}}, {{rec.clicks_sum}}</li>
-            {% endfor %}
-        </ul>
+{% extends 'base.html' %}
+{% load humanizelib %}
+{% block content %}
+    <h3>{{ publisher.name|title }} - {{ q_date }}</h3>
+    <table class="table table-striped">
+    <thead>
+        <th scope="col">#</th>
+        <th scope="col">Sources</th>
+        <th scope="col">Revenue</th>
+        <th scope="col">Clicks</th>
+    </thead>
+    <tbody>
+        {% for rec in publishers %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}.&nbsp;&nbsp;</th>
+                <td>{{rec.source.name|title}}</td>
+                <td>{{ rec.revenue_sum|floatformat:2|intcomma }}</td>
+                <td>{{ rec.clicks_sum }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
 
-    </body>
-</html>
+{% endblock %}
