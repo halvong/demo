@@ -26,4 +26,5 @@ python manage.py ingest --file demo_data.csv
 
 publishers = RevenueRecord.objects.filter(date="2019-10-20",publisher=4).values("source__name").annotate(revenue_sum=Sum('revenue'), clicks_sum=Sum('clicks')).order_by('source__name')
 records = RevenueRecord.objects.filter(date="2019-10-31").values('publisher__name').annotate(revenue_sum=Sum('revenue'), clicks_sum=Sum('clicks')).order_by('publisher__name')
+records = RevenueRecord.objects.filter(date="2019-10-31").values('date', 'publisher','publisher__name').annotate(revenue_sum=Sum('revenue'), clicks_sum=Sum('clicks')).order_by('publisher__name')
 

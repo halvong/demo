@@ -16,7 +16,7 @@ class DateView(View):
     def get(self, request, q_date):
         ddate = datetime.datetime.strptime(q_date,"%Y-%m-%d").strftime("%B %d, %Y")
         #records = RevenueRecord.objects.filter(date=q_date).annotate(revenue_sum=Sum('revenue'), clicks_sum=Sum('clicks')).order_by('publisher')
-        records = RevenueRecord.objects.filter(date=q_date).values('publisher__name').annotate(revenue_sum=Sum('revenue'), clicks_sum=Sum('clicks')).order_by('publisher__name')
+        records = RevenueRecord.objects.filter(date=q_date).values('date', 'publisher','publisher__name').annotate(revenue_sum=Sum('revenue'), clicks_sum=Sum('clicks')).order_by('publisher__name')
         return render(request, 'date_template.html', {'publishers': records, 'q_date': ddate})
 
 class PublisherView(View):
